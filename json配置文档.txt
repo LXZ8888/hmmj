@@ -1,0 +1,19 @@
+"window.zoomLevel": 1,
+"search.followSymlinks": false,
+"workbench.colorTheme": "Dark+ Material",
+// 默认使用prittier作为格式化工具
+"editor.defaultFormatter": "numso.prettier-standard-vscode",
+// 保存时自动格式化 - 按照eslint的规则格式化
+"editor.codeActionsOnSave": {
+"source.fixAll": true
+},
+"[javascript]": {
+"editor.defaultFormatter": "numso.prettier-standard-vscode"
+},
+"[html]": {
+"editor.defaultFormatter": "numso.prettier-standard-vscode"
+},
+"[vue]": {
+"editor.defaultFormatter": "numso.prettier-standard-vscode"
+},
+}
