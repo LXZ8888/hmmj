@@ -9,11 +9,11 @@ export const getToken = () => {
 }
 
 // 设置
-export const setToken = (newToken) => {
+export const setToken = newToken => {
   localStorage.setItem(KEY, newToken)
 }
 
 // 删除
-export const delToken = () => {
+export const removeToken = () => {
   localStorage.removeItem(KEY)
 }

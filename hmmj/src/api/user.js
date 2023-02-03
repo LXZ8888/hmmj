@@ -8,3 +8,8 @@ export const loginAPI = data => {
     data
   })
 }
+
+// 获取用户信息的接口,下面这种是简写请求
+export const userInfoAPI = () => {
+  return request.get('/auth/currentUser')
+}

@@ -1,4 +1,4 @@
-import { setToken, getToken } from '@/utils/storage'
+import { setToken, getToken, removeToken } from '@/utils/storage'
 export default {
   namespaced: true,
   //   开启命名空间
@@ -13,6 +13,10 @@ export default {
       state.token = token
       // 存储到本地
       setToken(token)
+    },
+    logout (state) {
+      state.token = ''
+      removeToken()
     }
   }
 }

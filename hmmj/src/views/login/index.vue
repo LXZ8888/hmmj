@@ -69,8 +69,11 @@ export default {
         const res = await loginAPI(this.form)
         console.log(res)
         this.$store.commit('user/setToken', res.data.token)
-        console.log(1)
-      } catch {}
+        this.$message.success('登录成功')
+        this.$router.push('/')
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }
