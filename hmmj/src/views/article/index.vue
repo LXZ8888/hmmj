@@ -9,8 +9,13 @@
       <template #header>
         <div class="header">
           <!-- 头部内容 -->
-          <span>共343天记录</span>
-          <el-button type="primary" round size="small" icon="el-icon-plus"
+          <span>共{{ total }}天记录</span>
+          <el-button
+            type="primary"
+            round
+            size="small"
+            icon="el-icon-plus"
+            @click="drawer = true"
             >添加面经</el-button
           >
         </div>
@@ -28,10 +33,10 @@
         </el-table-column>
         <el-table-column label="操作" width="180">
           <template slot-scope="scope">
-            <el-link @click="fn(scope)"
+            <el-link @click="showDrawer('view')"
               ><i style="font-size: 18px" class="el-icon-view"></i
             ></el-link>
-            <el-link @click="fn(scope)"
+            <el-link @click="showDrawer('edit')"
               ><i
                 style="font-size: 18px;margin:0 10px;"
                 class="el-icon-edit-outline"
@@ -55,6 +60,33 @@
       >
       </el-pagination>
     </el-card>
+    <!-- 抽屉效果组件 -->
+    <el-drawer
+      :title="title"
+      :visible.sync="drawer"
+      direction="rtl"
+      :size="600"
+    >
+      <!-- 抽屉 -->
+      <el-form
+        :model="form"
+        :rules="rules"
+        ref="form"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
+        <el-form-item label="标题" prop="stem" v-model="form.name">
+          <el-input></el-input>
+        </el-form-item>
+        <el-form-item label="标题" prop="content" v-model="form.name">
+          <el-input></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary">确认</el-button>
+          <el-button>取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-drawer>
   </div>
 </template>
 
@@ -67,7 +99,19 @@ export default {
       tableData: [],
       pageSize: 5,
       total: 0,
-      page: 1
+      page: 1,
+      drawer: false,
+      type: 'add',
+      form: {
+        stem: '',
+        content: '',
+        name: ''
+      },
+      rules: {
+        stem: [{ required: true, message: '请输入标题', trigger: 'blur' }],
+        content: [{ required: true, message: '请输入标题', trigger: 'blur' }]
+      }
+      // 用来保存被点击的抽屉的类型。
     }
   },
   created () {
@@ -89,8 +133,21 @@ export default {
       this.loadData()
     },
 
-    fn () {
-      console.log(1)
+    showDrawer (type) {
+      console.log(type)
+      this.drawer = true
+      this.type = type
+    }
+  },
+  computed: {
+    title () {
+      if (this.type === 'add') {
+        return '添加面经'
+      } else if (this.type === 'edit') {
+        return '修改面经'
+      } else {
+        return '面经预览'
+      }
     }
   }
 }
